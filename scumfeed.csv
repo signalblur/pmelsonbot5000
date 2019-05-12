@@ -1,0 +1,24 @@
+date_identified,malware/attack_tool,url,hash,c2
+2019-05-12 20:47:02,Lime-RAT,https://t.co/l3vAYfLCOr,023151dbe2df9f0538b5b603c097861979a49846b73e348c15d256b961b2232d,https://pastebin[.]com/raw/DDTVwwbu
+2019-05-12 17:47:03,Revenge,https://t.co/3qXsGosSx3,6c246f3ed79b8ee0bf1429755ce932b135ba2b1d0ccb704d44bab7a90534b2bd,"tcp://127[.]0[.]0[.]1:333,tcp://127[.]0[.]0[.]1:5000,"
+2019-05-12 10:45:02,PowerShell_Meterpreter_Reverse_HTTP_x86,https://t.co/vo2HHLK8pd,ec06a70f952cd6911bb5ad9c015c2e4b7c6033d35ab23802b97409f03c73d50a,192[.]168[.]1[.]230
+2019-05-12 06:50:03,PowerShell_Empire_Agent,https://t.co/TGf4lwqov5,ac3fee6a93a93604c0eee23cd1f30b9dbb59243d5ce80152ac8b3048ab2d8a4e,https://1[.]tcp[.]ngrok[.]io:23766/
+2019-05-12 05:17:03,njRat,https://t.co/4cKzTWunl3,0aec0328538966dd52417eeab93ad02e4b953a260fb17e08ee267b4f4f8b51a6,tcp://127[.]0[.]0[.]1:33
+2019-05-11 21:32:03,njRat,https://t.co/0rHbB5voeb,708f8b6e6e3e34fc1101cd73f2a98a17f7773dbaff1045ddf43fceb903b14d69,tcp://127[.]0[.]0[.]1:1177
+2019-05-11 20:47:03,njRat,https://t.co/PjfFTlIkGQ,4195f47c30fb0d6e789d833de0b89ac6f5d745193e4a1c7348755f25abcd48ae,tcp://sony1178[.]publicvm[.]com:1805
+date_identified,malware/attack_tool,url,hash,c2
+2019-05-12 20:47:02,Lime-RAT,https://t.co/l3vAYfLCOr,023151dbe2df9f0538b5b603c097861979a49846b73e348c15d256b961b2232d,https://pastebin[.]com/raw/DDTVwwbu
+2019-05-12 17:47:03,Revenge,https://t.co/3qXsGosSx3,6c246f3ed79b8ee0bf1429755ce932b135ba2b1d0ccb704d44bab7a90534b2bd,"tcp://127[.]0[.]0[.]1:333,tcp://127[.]0[.]0[.]1:5000,"
+2019-05-12 10:45:02,PowerShell_Meterpreter_Reverse_HTTP_x86,https://t.co/vo2HHLK8pd,ec06a70f952cd6911bb5ad9c015c2e4b7c6033d35ab23802b97409f03c73d50a,192[.]168[.]1[.]230
+2019-05-12 06:50:03,PowerShell_Empire_Agent,https://t.co/TGf4lwqov5,ac3fee6a93a93604c0eee23cd1f30b9dbb59243d5ce80152ac8b3048ab2d8a4e,https://1[.]tcp[.]ngrok[.]io:23766/
+2019-05-12 05:17:03,njRat,https://t.co/4cKzTWunl3,0aec0328538966dd52417eeab93ad02e4b953a260fb17e08ee267b4f4f8b51a6,tcp://127[.]0[.]0[.]1:33
+2019-05-11 21:32:03,njRat,https://t.co/0rHbB5voeb,708f8b6e6e3e34fc1101cd73f2a98a17f7773dbaff1045ddf43fceb903b14d69,tcp://127[.]0[.]0[.]1:1177
+2019-05-11 20:47:03,njRat,https://t.co/PjfFTlIkGQ,4195f47c30fb0d6e789d833de0b89ac6f5d745193e4a1c7348755f25abcd48ae,tcp://sony1178[.]publicvm[.]com:1805
+date_identified,malware/attack_tool,url,hash,c2
+2019-05-12 20:47:02,Lime-RAT,https://t.co/l3vAYfLCOr,023151dbe2df9f0538b5b603c097861979a49846b73e348c15d256b961b2232d,https://pastebin[.]com/raw/DDTVwwbu
+2019-05-12 17:47:03,Revenge,https://t.co/3qXsGosSx3,6c246f3ed79b8ee0bf1429755ce932b135ba2b1d0ccb704d44bab7a90534b2bd,"tcp://127[.]0[.]0[.]1:333,tcp://127[.]0[.]0[.]1:5000,"
+2019-05-12 10:45:02,PowerShell_Meterpreter_Reverse_HTTP_x86,https://t.co/vo2HHLK8pd,ec06a70f952cd6911bb5ad9c015c2e4b7c6033d35ab23802b97409f03c73d50a,192[.]168[.]1[.]230
+2019-05-12 06:50:03,PowerShell_Empire_Agent,https://t.co/TGf4lwqov5,ac3fee6a93a93604c0eee23cd1f30b9dbb59243d5ce80152ac8b3048ab2d8a4e,https://1[.]tcp[.]ngrok[.]io:23766/
+2019-05-12 05:17:03,njRat,https://t.co/4cKzTWunl3,0aec0328538966dd52417eeab93ad02e4b953a260fb17e08ee267b4f4f8b51a6,tcp://127[.]0[.]0[.]1:33
+2019-05-11 21:32:03,njRat,https://t.co/0rHbB5voeb,708f8b6e6e3e34fc1101cd73f2a98a17f7773dbaff1045ddf43fceb903b14d69,tcp://127[.]0[.]0[.]1:1177
+2019-05-11 20:47:03,njRat,https://t.co/PjfFTlIkGQ,4195f47c30fb0d6e789d833de0b89ac6f5d745193e4a1c7348755f25abcd48ae,tcp://sony1178[.]publicvm[.]com:1805

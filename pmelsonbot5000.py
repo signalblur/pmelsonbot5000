@@ -6,9 +6,20 @@ import yaml
 import re
 import csv
 from datetime import datetime, timedelta
+from github import Github
 
 start_date = datetime.today() - timedelta(days=1)
 end_date = datetime.today()
+
+def git_manager(access_token):
+    """
+    git_manager serves to perform all updates to the github repo itself.
+    """
+
+    git = Github("access_token")
+
+    repo = git.get_repo("david-burkett/pmelsonbot5000")
+    contents = repo.get_contents("README.md", ref="test")
 
 def ioc_csv(ioc_data):
     """
@@ -17,7 +28,7 @@ def ioc_csv(ioc_data):
     tools.
     """
 
-    top_row = ['malware/attack_tool', 'url', 'hash', 'c2']
+    top_row = ['date_identified', 'malware/attack_tool', 'url', 'hash', 'c2']
 
     with open('scumfeed.csv', 'a') as fp:
         wr = csv.writer(fp)
@@ -38,6 +49,7 @@ def extract(data):
         append_list = []
         if str(tweet.created_at) >= str(start_date.strftime("%Y-%m-%d %H:%M:%S")):
             reg_data = re.search(pattern, str(tweet.full_text))
+            append_list.append(tweet.created_at)
             append_list.append(reg_data.group('name'))
             append_list.append(reg_data.group('url'))
             append_list.append(reg_data.group('hash'))
@@ -62,6 +74,8 @@ def main():
     twitter_formatted = extract(twitter_raw)
     
     csv_twitter_formatted = ioc_csv(twitter_formatted)
+
+    deploy = git_manager(conf_data['git_token'])
 
 
 if __name__ == "__main__":
