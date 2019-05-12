@@ -4,10 +4,27 @@
 import tweepy
 import yaml
 import re
+import csv
 from datetime import datetime, timedelta
 
 start_date = datetime.today() - timedelta(days=1)
 end_date = datetime.today()
+
+def ioc_csv(ioc_data):
+    """
+    ioc_csv() serves to take a list of lists from the extract() function
+    and turn it into a csv file that can be more easily ingested by automated
+    tools.
+    """
+
+    top_row = ['malware/attack_tool', 'url', 'hash', 'c2']
+
+    with open('scumfeed.csv', 'a') as fp:
+        wr = csv.writer(fp)
+        wr.writerow(top_row)
+        for list in ioc_data:
+            wr.writerow(list)
+            
 
 def extract(data):
     """
@@ -27,7 +44,7 @@ def extract(data):
             append_list.append(reg_data.group('c2'))
             ioc_list.append(append_list)
     
-    print(ioc_list)
+    return ioc_list
     
 
 def main():
@@ -43,7 +60,8 @@ def main():
     twitter_raw = tweepy.Cursor(api.user_timeline, id="scumbots", since=start_date, until=end_date, tweet_mode='extended').items()
     
     twitter_formatted = extract(twitter_raw)
-        
+    
+    csv_twitter_formatted = ioc_csv(twitter_formatted)
 
 
 if __name__ == "__main__":
