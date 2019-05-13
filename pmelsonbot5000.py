@@ -27,6 +27,7 @@ def ioc_csv(ioc_data):
             wr.writerow(top_row)
             for list in ioc_data:
                 wr.writerow(list)
+
     except Exception as e:
         print('CSV creator failure.')
         print(e)
@@ -51,6 +52,7 @@ def extract(data):
                 append_list.append(reg_data.group('hash'))
                 append_list.append(reg_data.group('c2'))
                 ioc_list.append(append_list)
+                
     except Exception as e:
         print('Regex Parser failer')
         print(e)
