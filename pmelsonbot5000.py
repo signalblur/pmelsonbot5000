@@ -7,7 +7,6 @@ import re
 import csv
 import time
 from datetime import datetime, timedelta
-from github import Github
 
 start_date = datetime.today() - timedelta(days=1)
 end_date = datetime.today()
