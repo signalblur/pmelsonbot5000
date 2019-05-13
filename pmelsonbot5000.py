@@ -18,7 +18,7 @@ def ioc_csv(ioc_data):
     tools.
     """
 
-    top_row = ['date_identified', 'malware/attack_tool', 'url', 'hash', 'c2']
+    top_row = ['date_identified', 'implant_type', 'url', 'hash', 'c2']
 
     try:
         with open('scumfeed.csv', 'a') as fp:
