@@ -8,7 +8,7 @@ import csv
 import time
 from datetime import datetime, timedelta
 
-start_date = datetime.today() - timedelta(days=1)
+start_date = datetime.today() - timedelta(days=30)
 end_date = datetime.today()
 
 def ioc_csv(ioc_data):
@@ -85,7 +85,7 @@ def main():
             twitter_formatted = extract(twitter_raw)
 
             csv_twitter_formatted = ioc_csv(twitter_formatted)
-            time.sleep(180) # Sleeping for 24 hours
+            time.sleep(3600) # Sleeping for 24 hours
 
         except Exception as e:
             print('Data parsing error')
