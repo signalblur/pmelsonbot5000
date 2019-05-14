@@ -7,6 +7,7 @@ import re
 import csv
 import time
 from datetime import datetime, timedelta
+import os.path
 
 start_date = datetime.today() - timedelta(days=30)
 end_date = datetime.today()
@@ -21,16 +22,20 @@ def ioc_csv(ioc_data):
     top_row = ['date_identified', 'implant_type', 'url', 'hash', 'c2']
 
     try:
+        # Only write header once.
+        if not os.path.isfile('scumfeed.csv'):
+            with open('scumfeed.csv', 'w') as fp:
+                csv.writer(fp).writerow(top_row)
+
         with open('scumfeed.csv', 'a') as fp:
             wr = csv.writer(fp)
-            wr.writerow(top_row)
-            for list in ioc_data:
-                wr.writerow(list)
+            for d in ioc_data:
+                wr.writerow(d)
 
     except Exception as e:
         print('CSV creator failure.')
         print(e)
-            
+
 
 def extract(data):
     """
@@ -39,7 +44,7 @@ def extract(data):
 
     ioc_list = []
     pattern = '((?P<name>\S{1,}) found at (?P<url>\S{1,}) SHA256: (?P<hash>[a-zA-Z0-9]{1,}) C2: (?P<c2>\S{1,}))'
-    
+
     try:
         for tweet in data:
             append_list = []
@@ -51,20 +56,20 @@ def extract(data):
                 append_list.append(reg_data.group('hash'))
                 append_list.append(reg_data.group('c2'))
                 ioc_list.append(append_list)
-                
+
     except Exception as e:
         print('Regex Parser failer')
         print(e)
-    
+
     return ioc_list
-    
+
 
 def main():
     """
     App grabs past 30 days from the @ScumBots twitter feed, parses
     the data and makes it easily parsed for common security tooling.
     """
-    
+
     while True:
         try: # Authentication area.
             with open('conf.yaml', 'r') as f:
