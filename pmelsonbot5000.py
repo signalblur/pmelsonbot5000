@@ -30,7 +30,7 @@ def ioc_csv(ioc_data):
     except Exception as e:
         print('CSV creator failure.')
         print(e)
-            
+
 
 def extract(data):
     """
@@ -39,7 +39,7 @@ def extract(data):
 
     ioc_list = []
     pattern = '((?P<name>\S{1,}) found at (?P<url>\S{1,}) SHA256: (?P<hash>[a-zA-Z0-9]{1,}) C2: (?P<c2>\S{1,}))'
-    
+
     try:
         for tweet in data:
             append_list = []
@@ -51,20 +51,20 @@ def extract(data):
                 append_list.append(reg_data.group('hash'))
                 append_list.append(reg_data.group('c2'))
                 ioc_list.append(append_list)
-                
+
     except Exception as e:
         print('Regex Parser failer')
         print(e)
-    
+
     return ioc_list
-    
+
 
 def main():
     """
     App grabs past 30 days from the @ScumBots twitter feed, parses
     the data and makes it easily parsed for common security tooling.
     """
-    
+
     while True:
         try: # Authentication area.
             with open('conf.yaml', 'r') as f:
@@ -84,7 +84,7 @@ def main():
 
             twitter_formatted = extract(twitter_raw)
 
-            csv_twitter_formatted = ioc_csv(twitter_formatted)
+            ioc_csv(twitter_formatted)
             time.sleep(3600) # Sleeping for 24 hours
 
         except Exception as e:
