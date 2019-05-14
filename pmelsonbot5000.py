@@ -7,6 +7,7 @@ import re
 import csv
 import time
 from datetime import datetime, timedelta
+import os.path
 
 start_date = datetime.today() - timedelta(days=30)
 end_date = datetime.today()
@@ -21,11 +22,15 @@ def ioc_csv(ioc_data):
     top_row = ['date_identified', 'implant_type', 'url', 'hash', 'c2']
 
     try:
+        # Only write header once.
+        if not os.path.isfile('scumfeed.csv'):
+            with open('scumfeed.csv', 'w') as fp:
+                csv.writer(fp).writerow(top_row)
+
         with open('scumfeed.csv', 'a') as fp:
             wr = csv.writer(fp)
-            wr.writerow(top_row)
-            for list in ioc_data:
-                wr.writerow(list)
+            for d in ioc_data:
+                wr.writerow(d)
 
     except Exception as e:
         print('CSV creator failure.')
