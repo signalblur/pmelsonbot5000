@@ -49,13 +49,25 @@ def extract(data):
         for tweet in data:
             append_list = []
             if str(tweet.created_at) >= str(start_date.strftime("%Y-%m-%d %H:%M:%S")):
-                reg_data = re.search(pattern, str(tweet.full_text))
-                append_list.append(tweet.created_at)
-                append_list.append(reg_data.group('name'))
-                append_list.append(reg_data.group('url'))
-                append_list.append(reg_data.group('hash'))
-                append_list.append(reg_data.group('c2'))
-                ioc_list.append(append_list)
+                if 'Dexter' in str(tweet.full_text):
+                    print(tweet.full_text)
+                elif 'Alina' in str(tweet.full_text):
+                    print(tweet.full_text)
+                elif 'Diamondfox' in str(tweet.full_text):
+                    print(tweet.full_text)
+                elif 'Infinity' in str(tweet.full_text):
+                    print(tweet.full_text)
+                elif 'TreasureHunter' in str(tweet.full_text):
+                    print(tweet.full_text)
+                else:
+                    print(str(tweet.full_text))
+                    reg_data = re.search(pattern, str(tweet.full_text))
+                    append_list.append(tweet.created_at)
+                    append_list.append(reg_data.group('name'))
+                    append_list.append(reg_data.group('url'))
+                    append_list.append(reg_data.group('hash'))
+                    append_list.append(reg_data.group('c2').replace('tcp://', '').replace('http://', '').replace('[', '').replace(']', ''))
+                    ioc_list.append(append_list)
 
     except Exception as e:
         print('Regex Parser failer')
