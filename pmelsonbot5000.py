@@ -24,16 +24,25 @@ def ioc_csv(ioc_data):
 
     try:
         if os.path.isfile('scumfeed.csv'):
+            logging.info('Removing old existing data feed.')
             os.system('rm scumfeed.csv') # Removing data older than 30 days
             with open('scumfeed.csv', 'a') as fp:
                 csv.writer(fp).writerow(top_row)
                 wr = csv.writer(fp)
                 for d in ioc_data:
-                    wr.writerow(d)            
+                    wr.writerow(d)      
+        
+        else:
+            with open('scumfeed.csv', 'a') as fp:
+                logging.warning('No data feed exists. Investigate accordingly')
+                csv.writer(fp).writerow(top_row)
+                wr = csv.writer(fp)
+                for d in ioc_data:
+                    wr.writerow(d)
 
     except Exception as e:
-        print('CSV creator failure.')
-        print(e)
+        logging.critical('CSV creation failed!')
+        logging.critical(str(e))
 
 
 def extract(data):
@@ -50,14 +59,19 @@ def extract(data):
             if str(tweet.created_at) >= str(start_date.strftime("%Y-%m-%d %H:%M:%S")):
                 if 'Dexter' in str(tweet.full_text):
                     print(tweet.full_text)
+                    logging.info('Abnormal Data Identified')
                 elif 'Alina' in str(tweet.full_text):
                     print(tweet.full_text)
+                    logging.info('Abnormal Data Identified')
                 elif 'Diamondfox' in str(tweet.full_text):
                     print(tweet.full_text)
+                    logging.info('Abnormal Data Identified')
                 elif 'Infinity' in str(tweet.full_text):
                     print(tweet.full_text)
+                    logging.info('Abnormal Data Identified')
                 elif 'TreasureHunter' in str(tweet.full_text):
                     print(tweet.full_text)
+                    logging.info('Abnormal Data Identified')
                 else:
                     reg_data = re.search(pattern, str(tweet.full_text))
                     append_list.append(tweet.created_at)
@@ -66,10 +80,11 @@ def extract(data):
                     append_list.append(reg_data.group('hash'))
                     append_list.append(reg_data.group('c2').replace('tcp://', '').replace('http://', '').replace('[', '').replace(']', ''))
                     ioc_list.append(append_list)
+                    logging.info('Append list created succesfully.')
 
     except Exception as e:
-        print('Regex Parser failer')
-        print(e)
+        logging.critical('Data parsing failure!')
+        logging.critical(str(e))
 
     return ioc_list
 
@@ -79,6 +94,8 @@ def main():
     App grabs past 30 days from the @ScumBots twitter feed, parses
     the data and makes it easily parsed for common security tooling.
     """
+
+    logging.basicConfig(filename="pmelsonbot.log", level=logging.INFO)
 
     while True:
         try: # Authentication area.
@@ -91,8 +108,8 @@ def main():
             api = tweepy.API(auth)
 
         except Exception as e:
-            print('Unable to authenticate.')
-            print(e)
+            logging.critical('Authentication Failure!')
+            logging.critical(str(e))
 
         try: # Data Collection and parsing
             twitter_raw = tweepy.Cursor(api.user_timeline, id="scumbots", since=start_date, until=end_date, tweet_mode='extended').items()
@@ -103,8 +120,8 @@ def main():
             time.sleep(7200) # Sleeping for 2 hours
 
         except Exception as e:
-            print('Data parsing error')
-            print(e)
+            logging.critical('Data parsing error!')
+            logging.critical(str(e))
 
 
 if __name__ == "__main__":
