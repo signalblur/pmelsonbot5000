@@ -117,7 +117,7 @@ def main():
             twitter_formatted = extract(twitter_raw)
 
             ioc_csv(twitter_formatted)
-            time.sleep(7200) # Sleeping for 2 hours
+            time.sleep(21600) # Sleeping for 6 hours
 
         except Exception as e:
             logging.critical('Data parsing error!')
