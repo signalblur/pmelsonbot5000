@@ -1,6 +1,9 @@
 # Config files
 conf.yaml
 git_manager.py
+scumbots.csv
+pmelsonbot.log
+sf_sha256hash.csv
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
