@@ -80,7 +80,6 @@ def extract(data):
                     append_list.append(reg_data.group('hash'))
                     append_list.append(reg_data.group('c2').replace('tcp://', '').replace('http://', '').replace('[', '').replace(']', ''))
                     ioc_list.append(append_list)
-                    logging.info('Append list created succesfully.')
 
     except Exception as e:
         logging.critical('Data parsing failure!')
