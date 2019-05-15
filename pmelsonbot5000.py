@@ -22,7 +22,7 @@ def ioc_csv(ioc_data):
 
     top_row = ['date_identified', 'implant_type', 'url', 'hash', 'c2']
 
-    try:
+    try: # Building the default feed
         if os.path.isfile('scumfeed.csv'):
             logging.info('Removing old existing data feed.')
             os.system('rm scumfeed.csv') # Removing data older than 30 days
@@ -43,7 +43,28 @@ def ioc_csv(ioc_data):
     except Exception as e:
         logging.critical('CSV creation failed!')
         logging.critical(str(e))
+    
+    try: # Building the hash only feed
+        if os.path.isfile('sf_sha256hash.csv'):
+            logging.info('Removing old existing data feed.')
+            os.system('rm sf_sha256hash.csv') # Removing data older than 30 days
+            with open('sf_sha256hash.csv', 'a') as fp:
+                wr = csv.writer(fp)
+                for d in ioc_data:
+                    wr.writerow([d[3]])      
+        
+        else:
+            with open('sf_sha256hash.csv', 'a') as fp:
+                logging.warning('No data feed exists. Investigate accordingly')
+                wr = csv.writer(fp)
+                for d in ioc_data:
+                    wr.writerow([d[3]])
+        
+        logging.info('CSV Creation complete.')
 
+    except:
+        logging.critical('Hash CSV creation failed!')
+        logging.critical(str(e))
 
 def extract(data):
     """
