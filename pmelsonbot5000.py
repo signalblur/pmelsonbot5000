@@ -6,8 +6,9 @@ import yaml
 import re
 import csv
 import time
-from datetime import datetime, timedelta
 import os.path
+import logging
+from datetime import datetime, timedelta
 
 start_date = datetime.today() - timedelta(days=30)
 end_date = datetime.today()
@@ -22,15 +23,13 @@ def ioc_csv(ioc_data):
     top_row = ['date_identified', 'implant_type', 'url', 'hash', 'c2']
 
     try:
-        # Only write header once.
-        if not os.path.isfile('scumfeed.csv'):
-            with open('scumfeed.csv', 'w') as fp:
+        if os.path.isfile('scumfeed.csv'):
+            os.system('rm scumfeed.csv') # Removing data older than 30 days
+            with open('scumfeed.csv', 'a') as fp:
                 csv.writer(fp).writerow(top_row)
-
-        with open('scumfeed.csv', 'a') as fp:
-            wr = csv.writer(fp)
-            for d in ioc_data:
-                wr.writerow(d)
+                wr = csv.writer(fp)
+                for d in ioc_data:
+                    wr.writerow(d)            
 
     except Exception as e:
         print('CSV creator failure.')
@@ -60,7 +59,6 @@ def extract(data):
                 elif 'TreasureHunter' in str(tweet.full_text):
                     print(tweet.full_text)
                 else:
-                    print(str(tweet.full_text))
                     reg_data = re.search(pattern, str(tweet.full_text))
                     append_list.append(tweet.created_at)
                     append_list.append(reg_data.group('name'))
@@ -102,7 +100,7 @@ def main():
             twitter_formatted = extract(twitter_raw)
 
             ioc_csv(twitter_formatted)
-            time.sleep(3600) # Sleeping for 24 hours
+            time.sleep(7200) # Sleeping for 2 hours
 
         except Exception as e:
             print('Data parsing error')
