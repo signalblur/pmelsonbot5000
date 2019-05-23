@@ -66,6 +66,27 @@ def ioc_csv(ioc_data):
         logging.critical('Hash CSV creation failed!')
         logging.critical(str(e))
 
+def c2_parser(c2_data):
+    """
+    This function serves to break out and parse data from the C2 regex value and prepares it for it's own list.
+    """
+    
+    c2_ip = []
+    c2_domain = []
+    ip_pattern = '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}'
+
+    if ',' in c2_data:
+        for i in c2_data.split(','):
+            ip_reg = re.search(ip_pattern, i)
+            if ip_reg != None:
+                c2_ip.append(ip_reg)
+            else:
+                c2_domain.append(i)
+    
+    print(c2_ip)
+    print(c2_domain)
+
+
 def extract(data):
     """
     This function serves to extract fields from the tweet to make them easily parsable.
@@ -92,6 +113,7 @@ def extract(data):
                         append_list.append(reg_data.group('hash'))
                         append_list.append(reg_data.group('c2').replace('tcp://', '').replace('http://', '').replace('[', '').replace(']', ''))
                         ioc_list.append(append_list)
+                        c2_parser(reg_data.group('c2').replace('tcp://', '').replace('http://', '').replace('[', '').replace(']', ''))
 
     except Exception as e:
         logging.critical('Data parsing failure!')
