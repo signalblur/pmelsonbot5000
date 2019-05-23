@@ -45,16 +45,16 @@ def ioc_csv(ioc_data):
         logging.critical(str(e))
     
     try: # Building the hash only feed
-        if os.path.isfile('sf_sha256hash.csv'):
+        if os.path.isfile('sf_sha256hash.txt'):
             logging.info('Removing old existing data feed.')
-            os.system('rm sf_sha256hash.csv') # Removing data older than 30 days
-            with open('sf_sha256hash.csv', 'a') as fp:
+            os.system('rm sf_sha256hash.txt') # Removing data older than 30 days
+            with open('sf_sha256hash.txt', 'a') as fp:
                 wr = csv.writer(fp)
                 for d in ioc_data:
                     wr.writerow([d[3]])      
         
         else:
-            with open('sf_sha256hash.csv', 'a') as fp:
+            with open('sf_sha256hash.txt', 'a') as fp:
                 logging.warning('No data feed exists. Investigate accordingly')
                 wr = csv.writer(fp)
                 for d in ioc_data:
@@ -78,29 +78,20 @@ def extract(data):
         for tweet in data:
             append_list = []
             if str(tweet.created_at) >= str(start_date.strftime("%Y-%m-%d %H:%M:%S")):
-                if 'Dexter' in str(tweet.full_text):
-                    print(tweet.full_text)
-                    logging.info('Abnormal Data Identified')
-                elif 'Alina' in str(tweet.full_text):
-                    print(tweet.full_text)
-                    logging.info('Abnormal Data Identified')
-                elif 'Diamondfox' in str(tweet.full_text):
-                    print(tweet.full_text)
-                    logging.info('Abnormal Data Identified')
-                elif 'Infinity' in str(tweet.full_text):
-                    print(tweet.full_text)
-                    logging.info('Abnormal Data Identified')
-                elif 'TreasureHunter' in str(tweet.full_text):
+                if 'virustotal' in str(tweet.full_text):
                     print(tweet.full_text)
                     logging.info('Abnormal Data Identified')
                 else:
                     reg_data = re.search(pattern, str(tweet.full_text))
-                    append_list.append(tweet.created_at)
-                    append_list.append(reg_data.group('name'))
-                    append_list.append(reg_data.group('url'))
-                    append_list.append(reg_data.group('hash'))
-                    append_list.append(reg_data.group('c2').replace('tcp://', '').replace('http://', '').replace('[', '').replace(']', ''))
-                    ioc_list.append(append_list)
+                    if reg_data == None:
+                        pass
+                    else:
+                        append_list.append(tweet.created_at)
+                        append_list.append(reg_data.group('name'))
+                        append_list.append(reg_data.group('url'))
+                        append_list.append(reg_data.group('hash'))
+                        append_list.append(reg_data.group('c2').replace('tcp://', '').replace('http://', '').replace('[', '').replace(']', ''))
+                        ioc_list.append(append_list)
 
     except Exception as e:
         logging.critical('Data parsing failure!')
