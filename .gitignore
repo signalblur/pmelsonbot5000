@@ -4,6 +4,7 @@ git_manager.py
 scumbots.csv
 pmelsonbot.log
 sf_sha256hash.csv
+sf_sha256hash.txt
 scumfeed.csv
 
 # Byte-compiled / optimized / DLL files
