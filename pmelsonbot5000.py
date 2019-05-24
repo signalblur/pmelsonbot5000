@@ -48,15 +48,25 @@ def ioc_csv(ioc_data):
         if os.path.isfile('sf_sha256hash.txt'):
             logging.info('Removing old existing data feed.')
             os.system('rm sf_sha256hash.txt') # Removing data older than 30 days
+            hash_data = []
             with open('sf_sha256hash.txt', 'a') as fp:
                 for d in ioc_data:
-                    fp.write(d[3] + '\n')      
+                    if d[3] in hash_data:
+                        pass
+                    else:
+                        hash_data.append(d[3])
+                        fp.write(d[3] + '\n')      
         
         else:
             with open('sf_sha256hash.txt', 'a') as fp:
                 logging.warning('No data feed exists. Investigate accordingly')
+                hash_data = []
                 for d in ioc_data:
-                    fp.write(d[3] + '\n')  
+                    if d[3] in hash_data:
+                        pass
+                    else:
+                        hash_data.append(d[3])
+                        fp.write(d[3] + '\n')
         
         logging.info('Text Creation complete.')
 
